@@ -2,7 +2,7 @@ from django.db import models
 
 class Department(models.Model):
 
-    code = models.CharField(max_length=12, primary_key=True, editable=False)
+    code = models.CharField(max_length=12, null=False)
     name = models.CharField(max_length=100, null=False)
     description = models.TextField(null=True, default='', blank=True)
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de empleados</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    {% include "header.html" %}
+    <h1>Listado de empleados</h1>
+    <a href="/create">Agregar empleado</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Fecha</th>
+                <th>Departamento</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.code }}</td>
+                <td>{{ employee.names }}</td>
+                <td>{{ employee.last_names }}</td>
+                <td>{{ employee.date }}</td>
+                <td>{{ employee.department.name }}</td>
+                <td>
+                    <a href="/edit/{{ employee.code }}">Edit</a>
+                    <a href="/delete/{{ employee.code }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
