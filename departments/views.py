@@ -16,7 +16,10 @@ def index(request):
 
 def edit(request, code):
     dept = Department.objects.get(code=code)
-    return render(request, "edit_dept.html", {'dept' : dept})
+    if request.method == "POST":
+        return update(request, code)
+    else:
+        return render(request, "edit_dept.html", {'dept' : dept})
 
 def update(request, code):
     dept = Department.objects.get(code=code)
@@ -24,6 +27,7 @@ def update(request, code):
     #dept_code = request.POST.get("department")
     #dept = Department.objects.get(code=dept_code)
     if request.method == "POST":
+        errors = []
         form = DeptForm(request.POST, instance=dept)
         if form.is_valid():
             try:
@@ -38,8 +42,12 @@ def update(request, code):
         else:
             form.non_field_errors()
             field_errors = [ (field.label, field.errors) for field in form]
-            print(field_errors) 
-            return render(request, 'edit_dept.html', {'dept': dept})
+            print(field_errors)
+            errors_label = [field.label for field in form]
+            dept = Department.objects.get(code=code)
+            if 'Code' in errors_label:
+                errors.append("El departamento con eso código ya existe, intenta con uno diferente")
+            return render(request, 'edit_dept.html', {'dept': dept, 'errors' : errors})
         
 
 def delete(request, code):
@@ -50,6 +58,7 @@ def delete(request, code):
 
 def create(request):
     depts = Department.objects.all()
+    errors = []
     if request.method == "POST":
         form = DeptForm(request.POST)
         if form.is_valid():
@@ -61,9 +70,12 @@ def create(request):
         else:
             form.non_field_errors()
             field_errors = [ (field.label, field.errors) for field in form]
-            print(field_errors) 
+            print(field_errors)
             form = DeptForm()
-            return render(request, 'create_dept.html', {'employee':form, 'depts' : depts})
+            errors_label = [field.label for field in form]
+            if 'Code' in errors_label:
+                errors.append("El departamento con eso código ya existe, intenta con uno diferente")
+            return render(request, 'create_dept.html', {'employee':form, 'depts' : depts, 'errors' : errors})
     else:
         form = DeptForm()
         return render(request, 'create_dept.html', {'employee':form, 'depts' : depts})

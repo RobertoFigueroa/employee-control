@@ -14,57 +14,64 @@
 <body>
     {% include "header.html" %}
     <h1>Edición de empleado</h1>
-    <form method="POST" action="/update/{{employee.code}}">
-        {% csrf_token %}
-        <div class="container">
-            <div class="form-group-row">
-                <h3>Detalles</h3>
-            </div>
-            <div class="form-group-row">
-                <label class="col-sm-2 col-form-label">Código: </label>
-                <div class="col-sm-4">
-                    <input type="text" name="code" id="id_code" disabled value="{{employee.code}}" />
+    <div class="container">
+        <form method="POST" action="/update/{{employee.code}}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="form-group-row">
+                    <h3>Detalles</h3>
                 </div>
-            </div>
-            <div class="form-group-row">
-                <label class="col-sm-2 col-form-label">Nombres: </label>
-                <div class="col-sm-4">
-                    <input type="text" name="names" id="id_names" required value="{{employee.names}}" />
+                <div class="form-group-row">
+                    <label class="col-sm-2 col-form-label">Código: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="code" id="id_code" disabled
+                            value="{{employee.code}}" />
+                    </div>
                 </div>
-            </div>
+                <div class="form-group-row">
+                    <label class="col-sm-2 col-form-label">Nombres: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="names" id="id_names" required
+                            value="{{employee.names}}" />
+                    </div>
+                </div>
 
-            <div class="form-group-row">
-                <label class="col-sm-2 col-form-label">Apellidos: </label>
-                <div class="col-sm-4">
-                    <input type="text" name="last_names" id="id_last_names" required value="{{employee.last_names}}" />
+                <div class="form-group-row">
+                    <label class="col-sm-2 col-form-label">Apellidos: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="last_names" id="id_last_names" required
+                            value="{{employee.last_names}}" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group-row">
-                <label class="col-sm-2 col-form-label">Fecha: </label>
-                <div class="col-sm-4">
-                    <input type="text" name="date" id="id_date" value="{{employee.date}}" />
+                <div class="form-group-row">
+                    <label class="col-sm-2 col-form-label">Fecha: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="date" id="id_date" value="{{employee.date}}" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group-row">
-                <label class="col-sm-2 col-form-label">Departamento: </label>
-                <div class="col-sm-4">
-                    <select class="form-select" aria-label="Default select example" name="department" id="id_department">
-                        <option value="{{employee.department.id}}" selected>{{employee.department.name}}</option>
-                        {% for d in depts %}
-                        <option value="{{d.id}}">{{d.code}} - {{d.name}}</option>
-                        {% endfor %}
-                    </select>
+                <div class="form-group-row">
+                    <label class="col-sm-2 col-form-label">Departamento: </label>
+                    <div class="col-sm-4">
+                        <select class="form-select" aria-label="Default select example" name="department"
+                            id="id_department">
+                            <option value="{{employee.department.id}}" selected>{{employee.department.name}}</option>
+                            {% for d in depts %}
+                            <option value="{{d.id}}">{{d.code}} - {{d.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <br>
 
-            <div class="form-group-row">
-                <div class="col-sm-4">
-                    <button type="submit" class="btn btn-success">Actualizar</button>
+                <div class="form-group-row">
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </body>
 
 </html>

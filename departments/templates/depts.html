@@ -11,29 +11,31 @@
 </head>
 <body>
     {% include "header.html" %}
+    <div class="container">
     <h1>Departamentos</h1>
     <a href="create">Agregar departamento</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for dept in depts %}
-            <tr>
-                <td>{{ dept.code }}</td>
-                <td>{{ dept.name }}</td>
-                <td>{{ dept.description }}</td>
-                <td>
-                    <a href="edit/{{ dept.code }}">Edit</a>
-                    <a href="delete/{{ dept.code }}">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dept in depts %}
+                <tr>
+                    <th scope="row">{{ dept.code }}</td>
+                    <td>{{ dept.name }}</td>
+                    <td>{{ dept.description }}</td>
+                    <td>
+                        <a href="edit/{{ dept.code }}">Edit</a>
+                        <a href="delete/{{ dept.code }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
