@@ -7,7 +7,7 @@ class Employee(models.Model):
     names = models.CharField(max_length=100, null=False)
     last_names = models.CharField(max_length=100, null=False)
     date = models.DateField(blank=True, null=True)
-    department = models.ForeignKey(Department)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         latest_emp = Employee.objects.all().order_by("code").first()
